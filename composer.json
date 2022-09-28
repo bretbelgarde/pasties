@@ -1,0 +1,10 @@
+{
+    "autoload": {
+      "psr4": {
+        "pinebox": "src"
+      }
+    },
+    "require": {
+        "bcosca/fatfree": "^3.6"
+    }
+}
