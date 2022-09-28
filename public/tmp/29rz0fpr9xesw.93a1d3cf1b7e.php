@@ -1,0 +1,1 @@
+<pre><code class="lang-<?php echo $DATA['pastie']['contentType']; ?> line-numbers"><?php echo $DATA['pastie']['pastedContent']; ?></code></pre>

@@ -1,0 +1,38 @@
+<html>
+
+<head>
+  <title>Pasties</title>
+  <link rel="stylesheet" href="css/style.min.css">
+  <link rel="stylesheet" href="css/prism.css">
+</head>
+
+<body>
+  <include href="../templates/partials/header.html" />
+  <main id="pasties-container">
+    <div class="pasties-list">
+      <include href="../templates/partials/pasties-sidebar.html" />
+    </div>
+    <div class="pasties-display">
+      <include href="../templates/partials/pasties-display.html" />
+    </div>
+    <section class="button-container">
+      <button class="add-pastie" type="button" name="add-pastie">New Pastie</button>
+    </section>
+    <section class="new-pastie">
+      <h2 class="new-pastie-header">New Pastie</h2>
+      <div class="pastie-form">
+        <div class="pastie-title">
+          <label for="pastie-title">Title:
+            <input type="text" placeholder="Title">
+          </label>
+        </div>
+      </div>
+    </section>
+  </main>
+  <include href="../templates/partials/footer.html" />
+  <!-- js here -->
+  <script src="/js/prism.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+
+</html>

@@ -6,9 +6,8 @@
 
     // TODO: Move to config.ini
     $app->mset([
-      'DEBUG'    => 3,
-      'AUTOLOAD' => ROOT . '/src/',
-      'DB'       => new DB\Jig(ROOT . '/data/', DB\Jig::FORMAT_JSON)
+      'DEBUG' => 3,
+      'AUTOLOAD' => ROOT . '/src/'
     ]);
 
 

@@ -1,23 +1,28 @@
 <?php
-namespace pinebox;
-
 
 class AppController
 {
+  use PageRenderer;
+  protected $app;
 
-    protected $app;
+  public function __construct(Base $app) {
+      $this->app = $app;
+  }
 
-    public function __construct($app) {
-        $this->app = $app;
-    }
+  public function index() {
+    $data = ['message' => 'Hello World!'];
+    $this->render('home', $data);
+  }
 
-    public function index() {
+  public function add() {
 
-    }
+  }
 
-    private function render($data, $template) {
-        $this->app->set('data', $data);
-        echo \Template::instance()->render($template);
-    }
+  public function delete() {
 
+  }
+
+  public function update() {
+
+  }
 }
