@@ -1,2 +1,7 @@
 vendor/*
+node_modules/*
 .vscode
+public/tmp
+
+composer.lock
+package-lock.json

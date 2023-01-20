@@ -1,4 +1,6 @@
 <?php
+  namespace SkullBox\Models;
+  
   class Pastie {
     private const KEYLENGTH = 8;
 
@@ -8,8 +10,8 @@
     private $contentType;
     private $visibility;
 
-    public function __construct($content, $contentType, DateTime $timePosted = null, $id = null, $visibility = false) {
-      $this->timePosted = (is_null($timePosted)) ? new DateTime() : $timePosted;
+    public function __construct($content, $contentType, \DateTime $timePosted = null, $id = null, $visibility = false) {
+      $this->timePosted = (is_null($timePosted)) ? new \DateTime() : $timePosted;
       $this->id = (is_null($id)) ? $this->generateID() : $id;
       $this->content($content);
       $this->contentType($contentType);
@@ -17,11 +19,11 @@
     }
 
     public function id() {
-      return $id;
+      return $this->id;
     }
 
     public function timePosted() {
-      return $timePosted;
+      return $this->timePosted;
     }
 
     public function content($content = null) {

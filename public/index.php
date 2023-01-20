@@ -13,10 +13,10 @@
 
 
     // TODO Move to Routes.ini
-    $app->route('GET /', '\AppController->index');
+    $app->route('GET /', '\SkullBox\Core\AppController->index');
 
     $app->route('GET /test', function() {
-
+      echo "TEST <BR>";
 
     });
 
