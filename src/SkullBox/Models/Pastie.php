@@ -12,7 +12,7 @@
 
     public function __construct($content, $contentType, \DateTime $timePosted = null, $id = null, $visibility = false) {
       $this->timePosted = (is_null($timePosted)) ? new \DateTime() : $timePosted;
-      $this->id = (is_null($id)) ? $this->generateID() : $id;
+      $this->id = (is_null($id)) ? uniqid('') : $id;
       $this->content($content);
       $this->contentType($contentType);
       $this->visibility($visibility);
@@ -49,13 +49,5 @@
         'time_posted'  => $this->timePosted(),
         'visibility'   => $this->visibility()
       ];
-    }
-
-    private function generateID() {
-      $hex = md5(mktime(date('m-d-Y')) . uniqid('', true));
-      $uid = base64_encode(pack('H*', $hex));
-      while (strlen($uid) < self::KEYLENGTH) {
-
-      }
     }
   }
