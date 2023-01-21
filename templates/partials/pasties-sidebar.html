@@ -1,4 +1,10 @@
+<div class="pasties-list border-2 m-4 p-4 shadow-inner text-center">
 <check if="{{ key_exists('pasties_list', @DATA) }}">
-    <true>Do Pasties Stuff Here</true>
-    <false>Sorry, no pasties available.</false>
+    <true>
+        <div class="divide-y divde-solid">
+            Do Pasties Stuff Here
+        </div>
+    </true>
+    <false><p class="text-xl text-gray-500 text-center font-bold">Sorry, no pasties available.</p></false>
 </check>
+</div>

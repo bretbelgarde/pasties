@@ -1,1 +1,10 @@
-<pre><code class="lang-{{ @DATA.pastie.contentType }} line-numbers">{{ @DATA.pastie.pastedContent }}</code></pre>
+<div class="pasties-list border-2 mt-4 mb-6 mx-4 p-4">
+<check if="{{ key_exists('pastie', @DATA) && key_exists('pastedContent', @DATA) }}">
+    <true>
+        <pre class="font-mono">{{ @DATA.pastie.pastedContent }}</pre>
+    </true>
+    <false>
+        <div class="text-xl text-gray-500 text-center font-bold">Please Select a Pastie on the left or add a new one below.</div>
+    </false>
+</check>
+</div>
