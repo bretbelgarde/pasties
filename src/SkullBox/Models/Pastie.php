@@ -41,9 +41,9 @@ use DateTime;
     public function toArray() : array {
       return [
         'id'           => $this->id(),
-        'content_type' => $this->contentType(),
-        'content'      => $this->content(),
         'time_posted'  => $this->timePosted(),
+        'content'      => $this->content(),
+        'content_type' => $this->contentType(),
         'visible'      => $this->visible()
       ];
     }
