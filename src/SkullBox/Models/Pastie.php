@@ -5,10 +5,10 @@ use DateTime;
 
   class Pastie {
      public function __construct(
-        private ?string $id = null,
-        private ?\DateTime $timePosted = null,
         private string $content, 
-        private string $contentType, 
+        private string $contentType,
+        private ?string $id = null,
+        private ?\DateTime $timePosted = null, 
         private bool $visible = true
     ) {
       $this->timePosted ?? new \DateTime();
