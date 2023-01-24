@@ -1,18 +1,19 @@
 <?php
   namespace SkullBox\Models;
 
-use DateTime;
+  use DateTime;
 
   class Pastie {
      public function __construct(
+        private string $title,
         private string $content, 
         private string $contentType,
         private ?string $id = null,
-        private ?\DateTime $timePosted = null, 
+        private ?DateTime $timePosted = null, 
         private bool $visible = true
     ) {
-      $this->timePosted ?? new \DateTime();
-      $this->id ?? uniqid('');
+      $this->timePosted ??= new DateTime();
+      $this->id ??= uniqid();
     }
 
     public function id() : string {
@@ -21,6 +22,11 @@ use DateTime;
 
     public function timePosted() : DateTime {
       return $this->timePosted;
+    }
+
+    public function title(?string $title = null) {
+      if (is_null($title)) return $this->title;
+      $this->title = $title;
     }
 
     public function content(?string $content = null) {
@@ -42,6 +48,7 @@ use DateTime;
       return [
         'id'           => $this->id(),
         'time_posted'  => $this->timePosted(),
+        'title'        => $this->title(),
         'content'      => $this->content(),
         'content_type' => $this->contentType(),
         'visible'      => $this->visible()
