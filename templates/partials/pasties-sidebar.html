@@ -1,11 +1,16 @@
-<div class="pasties-list border-2 m-4 p-4 shadow-inner text-center">
-    <div class="divide-y divde-solid">
+<div class="pasties-list border-2 mt-4 mx-4 mb-5 p-4 shadow-inner text-center overflow-y-auto h-[79vh]">
+    <div class="divide-y">
         <template x-for="pastie in pasties" :key="pastie.id">
-            <div @click="active_pastie = pastie">
-                <div x-text="pastie.title"></div>
-                <div x-text="pastie.content"></div>
-                <div x-text="pastie.content_type"></div>
-                <div x-text="pastie.time_posted.date"></div>
+            <div @click="active_pastie = pastie" 
+                class="overflow-hidden text-ellipsis text-lg text-left odd:bg-slate-300 cursor-pointer">
+                <div class="p-4">
+                    <div x-text="pastie.title" class="font-bold"></div>
+                    <div x-text="pastie.content"></div>
+                    <div class="grid grid-cols-2">
+                        <div class="text-sm" x-text="pastie.content_type"></div>
+                        <div class="text-sm text-right" x-text="pastie.time_posted.date"></div>
+                    </div>
+                </div>
             </div>
         </template>
     </div>
