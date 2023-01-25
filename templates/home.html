@@ -11,9 +11,72 @@
   <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
   <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <script defer src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    "use strict";
+
+    function appInit() {
+      return {
+        pasties: getPasties(),
+        active_pastie: {
+          id: '',
+          time_posted:{
+            date:''
+          },
+          title:'',
+          content:'',
+          content_type:''
+        },
+        newPastie() {
+          return {
+            formData: {
+              pastie_title: '',
+              pastie_content: '',
+              pastie_content_type: '',
+            },
+            formMessage: '',
+            formLoading: false,
+            buttonText: "Add New Pastie",
+            submitForm() {
+              this.formMessage = '';
+              this.formLoading = true;
+              this.buttonText = "Adding New Pastie...";
+
+              fetch('/add', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json; charset=UTF-8',
+                  Accept: "application/json"
+                },
+                body: JSON.stringify(this.formData)
+              }).then((res) => {
+                this.formData.pastie_title = '';
+                this.formData.pastie_content = '';
+                this.formData.pastie_content_type = 'text';
+                this.formMessage = "Pastie added.";
+              }).catch((err) => {
+                console.log(err);
+                this.formMessage = "Error saving pastie.";
+              }).finally(() => {
+                this.formLoading = false;
+                this.buttonText = "Add New Pastie.";
+                this.pasties = getPasties();
+              });
+              console.log(this.pasties);
+            }
+          }
+        }
+      }
+    }
+    
+    async function getPasties() {
+      return await (await fetch('/get')).json();
+    }
+
+    
+    
+  </script>
 </head>
-<body class="font-default">
+<body class="font-default" x-data="appInit()">
   <include href="../templates/partials/header.html" />
   <main id="pasties-container" class="container mx-auto flex py-5">
     <section class="w-1/3">

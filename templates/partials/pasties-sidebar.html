@@ -1,10 +1,12 @@
 <div class="pasties-list border-2 m-4 p-4 shadow-inner text-center">
-<check if="{{ key_exists('pasties_list', @DATA) }}">
-    <true>
-        <div class="divide-y divde-solid">
-            Do Pasties Stuff Here
-        </div>
-    </true>
-    <false><p class="text-xl text-gray-500 text-center font-bold">Sorry, no pasties available.</p></false>
-</check>
+    <div class="divide-y divde-solid">
+        <template x-for="pastie in pasties" :key="pastie.id">
+            <div @click="active_pastie = pastie">
+                <div x-text="pastie.title"></div>
+                <div x-text="pastie.content"></div>
+                <div x-text="pastie.content_type"></div>
+                <div x-text="pastie.time_posted.date"></div>
+            </div>
+        </template>
+    </div>
 </div>

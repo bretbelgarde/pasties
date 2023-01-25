@@ -1,10 +1,13 @@
-<div class="pasties-list border-2 mt-4 mb-6 mx-4 p-4">
-<check if="{{ key_exists('pastie', @DATA) && key_exists('pastedContent', @DATA) }}">
-    <true>
-        <pre class="font-mono">{{ @DATA.pastie.pastedContent }}</pre>
-    </true>
-    <false>
-        <div class="text-xl text-gray-500 text-center font-bold">Please Select a Pastie on the left or add a new one below.</div>
-    </false>
-</check>
+<div class="pasties-list border-2 mt-4 mb-6 mx-4 p-4" 
+    x-model="active_pastie"
+    @click="console.log(active_pastie)"
+>
+    <div class="title" x-text="active_pastie.title"></div>
+    <div class="pastie-contents">
+        <pre class="font-mono" x-text="active_pastie.content"></pre>
+    </div>
+    <div class="pastie-meta">
+        <div class="pastie-created" x-text="active_pastie.time_posted.date"></div>
+        <div class="pastie-type" x-text="active_pastie.content_type"></div>
+    </div>
 </div>
