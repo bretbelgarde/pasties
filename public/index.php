@@ -20,6 +20,6 @@
     ], '\SkullBox\Core\AppController->getPasties');
     $app->route('POST /add',        '\SkullBox\Core\AppController->addPastie');
     $app->route('POST /update/@id', '\SkullBox\Core\AppController->updatePastie');
-    $app->route('POST /delete/@id', '\SkullBox\Core\AppController->deletePastie');
+    $app->route('POST /delete',     '\SkullBox\Core\AppController->deletePastie');
     
     $app->run();
