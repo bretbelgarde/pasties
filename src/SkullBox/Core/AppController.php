@@ -22,7 +22,7 @@ class AppController
   private PastieController $pastieData;
 
   public function __construct(private Base $app) {
-    $this->pastieData = new PastieController($app); 
+    $this->pastieData = new PastieController($app);
   }
 
   public function index():void {
@@ -36,7 +36,7 @@ class AppController
       $data = [];
       $data[] = $this->pastieData->getOne($id)->toArray();
     } else {
-      $data = array_map(function($pastie) {
+      $data = array_map(function ($pastie) {
         return $pastie->toArray();
       }, $this->pastieData->getAll());
     }
@@ -63,8 +63,8 @@ class AppController
     
     try {
       $this->pastieData->save(new Pastie(
-          $post['pastie_title'], 
-          $post['pastie_content'], 
+          $post['pastie_title'],
+          $post['pastie_content'],
           $post['pastie_content_type']
       ));
     } catch (\Exception $e) {
@@ -77,15 +77,19 @@ class AppController
     $this->renderJSON(["message" => "Pastie Added"]);
   }
 
-  public function updatePastie() {}
+  public function updatePastie() {
+    // Not Yet Implemented
+  }
 
-  public function deletePastie() {}
-  
+  public function deletePastie() {
+    // Not Yet Iplemented
+  }
+
   private function validateFormData(array $formData) : bool {
-    foreach($formData as $key => $field) {
+    foreach ($formData as $key => $field) {
       if (!key_exists($key, self::VALID_FIELDS)) return false;
-
-      return true;
     }
+
+    return true;
   }
 }
