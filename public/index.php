@@ -1,5 +1,5 @@
 <?php
-    require '../vendor/autoload.php';
+    require_once '../vendor/autoload.php';
     define('ROOT', dirname(__DIR__));
 
     $app = Base::instance();
@@ -15,7 +15,7 @@
     // TODO Move to Routes.ini
     $app->route('GET /', '\SkullBox\Core\AppController->index');
     $app->route([
-      'GET /get', 
+      'GET /get',
       'GET /get/@id'
     ], '\SkullBox\Core\AppController->getPasties');
     $app->route('POST /add',        '\SkullBox\Core\AppController->addPastie');
