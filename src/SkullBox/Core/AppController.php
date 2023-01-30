@@ -78,7 +78,27 @@ class AppController
   }
 
   public function deletePastie() {
-    // Not Yet Iplemented
+    $post = $this->getJSONPost();
+    
+    if (!key_exists('pastie_id', $post) ||
+        empty($post['pastie_id'])) {
+      $this->renderJSON([
+        'message' => 'Error: Unable to delete pastie.',
+        'error'   => 'Post data is empty or missing id.'
+      ]);
+      return;
+    }
+
+    if (!$this->pastieData->delete($post['pastie_id'])) {
+        $this->renderJSON([
+            'message' => 'Error: Unable to delete pastie.',
+            'error'   => 'Unable to connect to database.'
+        ]);
+        return;
+    }
+
+    $this->renderJSON(['message' => 'Pastie deleted.']);
+
   }
 
   private function validateFormData(array $formData) : bool {

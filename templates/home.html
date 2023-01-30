@@ -1,71 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pasties</title>
-  <link rel="stylesheet" href="/css/app.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
-  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-  <script>
-    "use strict";
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasties</title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script>
+        "use strict";
 
     function appInit() {
-      return {
-        pasties: getPasties(),
-        active_pastie: {
-          id: '',
-          time_posted:{
-            date:''
-          },
-          title:'',
-          content:'',
-          content_type:''
+        return {
+            pasties: getPasties(),
+            active_pastie: {
+            id: '',
+            time_posted:{
+                date:''
+            },
+            title:'',
+            content:'',
+            content_type:''
         },
         newPastie() {
-          return {
-            formData: {
-              pastie_title: '',
-              pastie_content: '',
-              pastie_content_type: '',
-            },
-            formMessage: '',
-            formLoading: false,
-            buttonText: "Add New Pastie",
-            submitForm() {
-              this.formMessage = '';
-              this.formLoading = true;
-              this.buttonText = "Adding New Pastie...";
+            return {
+                formData: {
+                    pastie_title: '',
+                    pastie_content: '',
+                    pastie_content_type: '',
+                },
+                formMessage: '',
+                formLoading: false,
+                buttonText: "Add New Pastie",
+                submitForm() {
+                    this.formMessage = '';
+                    this.formLoading = true;
+                    this.buttonText = "Adding New Pastie...";
 
-              fetch('/add', {
+                    fetch('/add', {
+                        method: 'POST',
+                        headers: {
+                        'Content-Type': 'application/json; charset=UTF-8',
+                        Accept: "application/json"
+                        },
+                        body: JSON.stringify(this.formData)
+                    }).then((res) => {
+                        this.formData.pastie_title = '';
+                        this.formData.pastie_content = '';
+                        this.formData.pastie_content_type = 'text';
+                        this.formMessage = "Pastie added.";
+                    }).catch((err) => {
+                        console.log(err);
+                        this.formMessage = "Error saving pastie.";
+                    }).finally(() => {
+                        this.formLoading = false;
+                        this.buttonText = "Add New Pastie.";
+                        this.pasties = getPasties();
+                    });
+                }
+            }
+        },
+        deletePastie(id) {
+            fetch('/delete', {
                 method: 'POST',
                 headers: {
-                  'Content-Type': 'application/json; charset=UTF-8',
-                  Accept: "application/json"
+                    'Content-Type': 'application/json; charset=UTF-8',
+                    Accept: "application/json"
                 },
-                body: JSON.stringify(this.formData)
-              }).then((res) => {
-                this.formData.pastie_title = '';
-                this.formData.pastie_content = '';
-                this.formData.pastie_content_type = 'text';
-                this.formMessage = "Pastie added.";
-              }).catch((err) => {
-                console.log(err);
-                this.formMessage = "Error saving pastie.";
-              }).finally(() => {
-                this.formLoading = false;
-                this.buttonText = "Add New Pastie.";
+                body: JSON.stringify({pastie_id: id})
+            }).then((res) => { 
+                console.log(res.body);
                 this.pasties = getPasties();
-              });
-            }
-          }
+            }).catch((err) => {
+                console.log(err);
+            });
         }
-      }
     }
+}
     
     async function getPasties() {
       return await (await fetch('/get')).json();
