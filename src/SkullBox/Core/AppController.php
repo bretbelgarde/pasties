@@ -12,6 +12,7 @@ class AppController
 
   use \SkullBox\Utils\PageRenderer;
   use \SkullBox\Utils\JsonRenderer;
+  use \SkullBox\Utils\GetJSONPost;
 
   const VALID_FIELDS = [
     'pastie_title',
@@ -45,12 +46,7 @@ class AppController
   }
 
   public function addPastie() {
-    /*
-     * NOTE must use file_get_contents('php://input') to get
-     * json from an AJAX request.
-     */
-
-    $post = json_decode(file_get_contents('php://input'), true);
+    $post = $this->getJSONPost();
 
     if ($this->validateFormData($post)) {
       $this->renderJSON([
