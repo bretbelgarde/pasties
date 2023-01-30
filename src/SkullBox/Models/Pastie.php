@@ -6,10 +6,10 @@
   class Pastie {
      public function __construct(
         private string $title,
-        private string $content, 
+        private string $content,
         private string $contentType,
         private ?string $id = null,
-        private ?DateTime $timePosted = null, 
+        private ?DateTime $timePosted = null,
         private bool $visible = true
     ) {
       $this->timePosted ??= new DateTime();
